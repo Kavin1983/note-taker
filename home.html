@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Note-Taker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">Note Taker</h1>
+      <span class="header__made-by">By Kavin Y.</span>
+    </header>
+    <div class="filter-notes">
+      <button class="delete-folder">
+        <svg class="delete-folder__icon">
+          <use href="icons.svg#icon-folder-minus"></use>
+        </svg>
+      </button>
+
+      <button class="add-folder">
+        <svg class="add-folder__icon">
+          <use href="icons.svg#icon-folder-plus"></use>
+        </svg>
+      </button>
+
+      <input
+        type="text"
+        class="filter-notes__search"
+        placeholder="Search for any notes here"
+      />
+      <select class="filter-notes__dropdown">
+        <option value="regular">Sort by...</option>
+        <option value="byEdit">Sort by last edited</option>
+        <option value="byCreated">Sort by time created</option>
+      </select>
+
+      <button class="add-note">
+        <svg class="add-note__icon">
+          <use href="icons.svg#icon-pencil"></use>
+        </svg>
+      </button>
+    </div>
+    <main>
+      <div class="folders"></div>
+      <div class="recent-notes"></div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

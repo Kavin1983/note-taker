@@ -1,0 +1,412 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+:root {
+  --color-blue: #053c70;
+  --color-grey: #f1ebeb;
+  --color-grey-light: #ebe5e5;
+  --color-folder: #e9d18f;
+  --color-grey-dark: rgb(44, 44, 44);
+  --color-yellow: #f5e502;
+  --color-red: #e73718;
+}
+
+@mixin icon {
+  width: 3rem;
+  height: 3rem;
+  fill: #053c70;
+  margin-right: 3rem;
+}
+
+@mixin tab {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-folder);
+  cursor: pointer;
+  border-top: 1px solid darken(#e9d18f, 10%);
+  border-bottom: 1px solid darken(#e9d18f, 10%);
+
+  &__name {
+    font-size: 1.6rem;
+  }
+  &__icon {
+    @include icon;
+  }
+}
+
+.header {
+  background-color: var(--color-blue);
+  color: #fff;
+  padding: 3rem 5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  &__title {
+    font-size: 4rem;
+  }
+
+  &__made-by {
+    font-size: 1.6rem;
+  }
+}
+
+h2 {
+  font-size: 2.4rem;
+  color: #fff;
+  font-weight: normal;
+}
+
+.filter-notes {
+  background-color: var(--color-grey-light);
+  padding: 1.5rem 5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 3px solid rgb(216, 213, 213);
+
+  &__search {
+    width: 25rem;
+    margin-left: 10rem;
+    margin-right: 5rem;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 1.6rem;
+  }
+
+  &__dropdown {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+  }
+
+  .add-folder,
+  .delete-folder,
+  .add-note {
+    align-self: flex-end;
+    width: 4rem;
+    height: 4rem;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &__icon {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
+
+.add-folder,
+.add-note {
+  fill: #000000;
+  margin-left: 5rem;
+  background-color: var(--color-yellow);
+}
+
+.add-note {
+  margin-left: 6rem;
+}
+.delete-folder {
+  fill: var(--color-grey);
+  margin-left: 25rem;
+  background-color: var(--color-red);
+}
+
+main {
+  max-width: 940px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.folders {
+  flex: 1;
+  background-color: var(--color-grey-light);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+  overflow: scroll;
+  position: relative;
+
+  .folder {
+    @include tab;
+  }
+
+  .note-tab {
+    @include tab;
+    width: 95%;
+    margin-left: auto;
+
+    &__name {
+      font-size: 1.4rem;
+    }
+
+    &__icon {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
+
+.recent-notes {
+  flex: 2;
+  background-color: var(--color-grey);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60rem;
+  overflow: scroll;
+  padding: 1rem;
+  padding-top: 2rem;
+
+  .note {
+    cursor: pointer;
+    width: 90%;
+    background-color: var(--color-blue);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-bottom: 2rem;
+    padding: 2rem 1rem;
+    border: 5px solid var(--color-grey-dark);
+    position: relative;
+
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__description {
+      display: inline-block;
+      width: 70%;
+      margin-top: 1rem;
+      padding: 0.5rem;
+      border-top: 3px solid var(--color-grey);
+      font-size: 1.6rem;
+    }
+
+    &__last-edited {
+      font-style: italic;
+      font-size: 1.6rem;
+    }
+
+    &__delete {
+      width: 4rem;
+      height: 4rem;
+      border: none;
+      border-radius: 50%;
+      position: absolute;
+      top: 30%;
+      left: 85%;
+      cursor: pointer;
+    }
+
+    &__delete-icon {
+      @include icon;
+      margin: 0 auto;
+    }
+  }
+}
+
+.background {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal--note,
+.modal--folder {
+  z-index: 20;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-blue);
+  height: 40rem;
+  width: 50rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+
+  &__field {
+    width: 30rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__dropdown {
+    width: 20rem;
+    border: none;
+    padding: 0.5rem 1rem;
+  }
+
+  &__submit-button {
+    border: none;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: var(--color-red);
+    color: #fff;
+    font-size: 1.6rem;
+  }
+
+  &__title,
+  &__text {
+    width: 30rem;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+  }
+
+  &__text {
+    height: 15rem;
+  }
+
+  &__close-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 50%;
+    color: var(--color-blue);
+    font-weight: 600;
+    background-color: var(--color-grey);
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+.no-notes {
+  margin-top: 4rem;
+  font-size: 2.6rem;
+  text-decoration: underline;
+}
+
+.no-folders {
+  margin-top: 4rem;
+  font-size: 1.8rem;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.error {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 3rem 5rem;
+  background-color: #e73718;
+
+  &__message {
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 1080px) {
+  html {
+    font-size: 56.5%;
+  }
+
+  .delete-folder {
+    margin-left: 10rem;
+  }
+
+  .recent-notes {
+    height: 65rem;
+  }
+}
+
+@media only screen and (max-width: 940px) {
+  html {
+    font-size: 50.5%;
+  }
+
+  .delete-folder {
+    margin-left: 5rem;
+  }
+
+  .recent-notes {
+    height: 70rem;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  html {
+    font-size: 48.5%;
+  }
+
+  .delete-folder {
+    margin-left: 2rem;
+  }
+
+  .filter-notes__search {
+    width: 17rem;
+    margin-left: 5rem;
+  }
+
+  @mixin icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .recent-notes {
+    height: 75rem;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  html {
+    font-size: 45.5%;
+  }
+
+  .delete-folder {
+    margin-left: 1rem;
+  }
+
+  .filter-notes__search {
+    margin-right: 2rem;
+    margin-left: 2rem;
+  }
+
+  .add-note {
+    margin-left: 2rem;
+  }
+
+  .recent-notes {
+    height: 80rem;
+  }
+}
